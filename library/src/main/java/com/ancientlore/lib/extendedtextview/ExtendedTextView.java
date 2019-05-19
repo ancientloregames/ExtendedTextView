@@ -58,7 +58,9 @@ public class ExtendedTextView extends AppCompatTextView
 	@Override
 	public void setCompoundDrawables(@Nullable Drawable left, @Nullable Drawable top, @Nullable Drawable right, @Nullable Drawable bottom)
 	{
-		setImages(left, top, right, bottom);
+		super.setCompoundDrawables(left, top, right, bottom);
+		updateDrawablesSize();
+		updateDrawablesTint();
 	}
 
 	@Override
@@ -68,17 +70,10 @@ public class ExtendedTextView extends AppCompatTextView
 		Utils.setIntrinsicBounds(top);
 		Utils.setIntrinsicBounds(right);
 		Utils.setIntrinsicBounds(bottom);
-		setImages(left, top, right, bottom);
+		setCompoundDrawables(left, top, right, bottom);
 	}
 
-	public void setImages(@Nullable Drawable left, @Nullable Drawable top, @Nullable Drawable right, @Nullable Drawable bottom)
-	{
-		super.setCompoundDrawables(left, top, right, bottom);
-		updateDrawablesSize();
-		updateDrawablesTint();
-	}
-
-	public void setLeftImage(@Nullable Drawable drawable)
+	public void setLeftDrawable(@Nullable Drawable drawable)
 	{
 		Utils.setSize(drawable, drawableSize);
 		Utils.setTint(drawable, drawableTint);
@@ -86,7 +81,7 @@ public class ExtendedTextView extends AppCompatTextView
 		super.setCompoundDrawables(drawable, drawables[1], drawables[2], drawables[3]);
 	}
 
-	public void setTopImage(@Nullable Drawable drawable)
+	public void setTopDrawable(@Nullable Drawable drawable)
 	{
 		Utils.setSize(drawable, drawableSize);
 		Utils.setTint(drawable, drawableTint);
@@ -94,7 +89,7 @@ public class ExtendedTextView extends AppCompatTextView
 		super.setCompoundDrawables(drawables[0], drawable, drawables[2], drawables[3]);
 	}
 
-	public void setRightImage(@Nullable Drawable drawable)
+	public void setRightDrawable(@Nullable Drawable drawable)
 	{
 		Utils.setSize(drawable, drawableSize);
 		Utils.setTint(drawable, drawableTint);
@@ -102,7 +97,7 @@ public class ExtendedTextView extends AppCompatTextView
 		super.setCompoundDrawables(drawables[0], drawables[1], drawable, drawables[3]);
 	}
 
-	public void setBottomImage(@Nullable Drawable drawable)
+	public void setBottomDrawable(@Nullable Drawable drawable)
 	{
 		Utils.setSize(drawable, drawableSize);
 		Utils.setTint(drawable, drawableTint);
@@ -110,9 +105,9 @@ public class ExtendedTextView extends AppCompatTextView
 		super.setCompoundDrawables(drawables[0], drawables[1], drawables[2], drawable);
 	}
 
-	public void resetImages()
+	public void resetDrawables()
 	{
-		setCompoundDrawables(null, null, null, null);
+		super.setCompoundDrawables(null, null, null, null);
 	}
 
 	public void setDrawableTint(@ColorInt int color)
