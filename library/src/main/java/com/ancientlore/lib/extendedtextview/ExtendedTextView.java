@@ -16,6 +16,8 @@ public class ExtendedTextView extends AppCompatTextView
 	@ColorInt
 	private int drawableTint = Color.TRANSPARENT;
 
+	private int drawableSize = -1;
+
 	public ExtendedTextView(Context context)
 	{
 		super(context);
@@ -42,10 +44,13 @@ public class ExtendedTextView extends AppCompatTextView
 
 			try {
 				drawableTint = styles.getColor(R.styleable.ExtendedTextView_drawableTint, Color.TRANSPARENT);
+				drawableSize = styles.getDimensionPixelSize(R.styleable.ExtendedTextView_drawableSize, -1);
 			} finally {
 				styles.recycle();
 			}
 		}
+
+		updateDrawablesSize();
 
 		updateDrawablesTint();
 	}
@@ -69,11 +74,13 @@ public class ExtendedTextView extends AppCompatTextView
 	public void setImages(@Nullable Drawable left, @Nullable Drawable top, @Nullable Drawable right, @Nullable Drawable bottom)
 	{
 		super.setCompoundDrawables(left, top, right, bottom);
+		updateDrawablesSize();
 		updateDrawablesTint();
 	}
 
 	public void setLeftImage(@Nullable Drawable drawable)
 	{
+		Utils.setSize(drawable, drawableSize);
 		Utils.setTint(drawable, drawableTint);
 		Drawable[] drawables = getCompoundDrawables();
 		super.setCompoundDrawables(drawable, drawables[1], drawables[2], drawables[3]);
@@ -81,6 +88,7 @@ public class ExtendedTextView extends AppCompatTextView
 
 	public void setTopImage(@Nullable Drawable drawable)
 	{
+		Utils.setSize(drawable, drawableSize);
 		Utils.setTint(drawable, drawableTint);
 		Drawable[] drawables = getCompoundDrawables();
 		super.setCompoundDrawables(drawables[0], drawable, drawables[2], drawables[3]);
@@ -88,6 +96,7 @@ public class ExtendedTextView extends AppCompatTextView
 
 	public void setRightImage(@Nullable Drawable drawable)
 	{
+		Utils.setSize(drawable, drawableSize);
 		Utils.setTint(drawable, drawableTint);
 		Drawable[] drawables = getCompoundDrawables();
 		super.setCompoundDrawables(drawables[0], drawables[1], drawable, drawables[3]);
@@ -95,6 +104,7 @@ public class ExtendedTextView extends AppCompatTextView
 
 	public void setBottomImage(@Nullable Drawable drawable)
 	{
+		Utils.setSize(drawable, drawableSize);
 		Utils.setTint(drawable, drawableTint);
 		Drawable[] drawables = getCompoundDrawables();
 		super.setCompoundDrawables(drawables[0], drawables[1], drawables[2], drawable);
@@ -118,5 +128,14 @@ public class ExtendedTextView extends AppCompatTextView
 		Utils.setTint(drawables[1], drawableTint);
 		Utils.setTint(drawables[2], drawableTint);
 		Utils.setTint(drawables[3], drawableTint);
+	}
+
+	private void updateDrawablesSize()
+	{
+		Drawable[] drawables = getCompoundDrawables();
+		Utils.setSize(drawables[0], drawableSize);
+		Utils.setSize(drawables[1], drawableSize);
+		Utils.setSize(drawables[2], drawableSize);
+		Utils.setSize(drawables[3], drawableSize);
 	}
 }
