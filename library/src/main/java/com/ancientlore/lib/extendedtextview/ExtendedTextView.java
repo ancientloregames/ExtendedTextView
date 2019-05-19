@@ -30,6 +30,16 @@ public class ExtendedTextView extends AppCompatTextView
 		setImages(left, top, right, bottom);
 	}
 
+	@Override
+	public void setCompoundDrawablesWithIntrinsicBounds(@Nullable Drawable left, @Nullable Drawable top, @Nullable Drawable right, @Nullable Drawable bottom)
+	{
+		Utils.setIntrinsicBounds(left);
+		Utils.setIntrinsicBounds(top);
+		Utils.setIntrinsicBounds(right);
+		Utils.setIntrinsicBounds(bottom);
+		setImages(left, top, right, bottom);
+	}
+
 	public void setImages(@Nullable Drawable left, @Nullable Drawable top, @Nullable Drawable right, @Nullable Drawable bottom)
 	{
 		super.setCompoundDrawables(left, top, right, bottom);
